@@ -1,0 +1,29 @@
+<html>
+  <body>
+      <form onsubmit="savetoLocalStorage(event)">
+
+        <h1>Add User</h1>
+          <label>Name:</label>
+          <input type="text" name="username" required>
+
+          <br>
+          <label>Email:</label>
+          <input type="text" name="emailid" required>
+          
+          <br>
+        <button>Submit</button>
+      </form>
+
+      <script>
+        function savetoLocalStorage(){
+            event.preventDefault();
+            const name = event.target.username.value;
+            const email = event.target.emailid.value;
+
+            localStorage.setItem('name', name);
+            localStorage.setItem('email', email);
+        }
+      </script>
+    </section>
+  </body>
+</html>
