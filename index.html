@@ -20,8 +20,13 @@
             const name = event.target.username.value;
             const email = event.target.emailid.value;
 
-            localStorage.setItem('name', name);
-            localStorage.setItem('email', email);
+            // localStorage.setItem('name', name);
+            // localStorage.setItem('email', email);
+
+            const name_se = JSON.stringify(name);
+            localStorage.setItem('name', name_se);
+            const email_se = JSON.stringify(email);
+            localStorage.setItem('email', email_se);
         }
       </script>
     </section>
