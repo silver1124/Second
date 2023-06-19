@@ -13,20 +13,33 @@
           <br>
         <button>Submit</button>
       </form>
-
+      <ul id = 'listofitems'></ul>
       <script>
-        function savetoLocalStorage(){
+        function savetoLocalStorage(event){
             event.preventDefault();
+            
             const name = event.target.username.value;
             const email = event.target.emailid.value;
 
-            // localStorage.setItem('name', name);
-            // localStorage.setItem('email', email);
-
             const name_se = JSON.stringify(name);
-            localStorage.setItem('name', name_se);
             const email_se = JSON.stringify(email);
+
+            const obj ={
+                name_se ,
+                email_se
+            };
+
+            localStorage.setItem('name', name_se);
             localStorage.setItem('email', email_se);
+
+            showuser(obj);
+
+        }
+        function showuser(obj){
+            const parElement = document.getElementById('listofitems');
+            const childElement = document.createElement('li');
+            childElement.textContent= obj.name_se+'-'+obj.email_se;
+            parElement.appendChild(childElement);
         }
       </script>
     </section>
