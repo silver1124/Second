@@ -4,11 +4,11 @@
 
         <h1>Add User</h1>
           <label>Name:</label>
-          <input type="text" name="username" required/>
+          <input type="text" name="username" id = 'idname' required/>
 
           <br>
           <label>Email:</label>
-          <input type="text" name="emailid" required/>
+          <input type="text" name="emailid" id = 'idemail' required/>
           
           <br>
         <button>Submit</button>
@@ -40,8 +40,19 @@
                 localStorage.removeItem(obj.email)
                 parElement.removeChild(childElement);
             }
+            const editbtn = document.createElement('input');
+            editbtn.type = 'button'
+            editbtn.name = 'editbtn'
+            editbtn.value = 'Edit'
+            editbtn.onclick = function(){
+                localStorage.removeItem(obj.email);
+                parElement.removeChild(childElement);
+                document.getElementById('idname').value = obj.name
+                document.getElementById('idemail').value = obj.email
+            }
             childElement.textContent= obj.name +' - '+obj.email;
             childElement.appendChild(deletebtn);
+            childElement.appendChild(editbtn);
             parElement.appendChild(childElement);
         }
       </script>
