@@ -4,15 +4,16 @@
 
         <h1>Add User</h1>
           <label>Name:</label>
-          <input type="text" name="username" required>
+          <input type="text" name="username" required/>
 
           <br>
           <label>Email:</label>
-          <input type="text" name="emailid" required>
+          <input type="text" name="emailid" required/>
           
           <br>
         <button>Submit</button>
       </form>
+
       <ul id = 'listofitems'></ul>
       <script>
         function savetoLocalStorage(event){
@@ -20,25 +21,27 @@
             
             const name = event.target.username.value;
             const email = event.target.emailid.value;
-
-            const name_se = JSON.stringify(name);
-            const email_se = JSON.stringify(email);
-
             const obj ={
-                name_se ,
-                email_se
+                name ,
+                email
             };
-
-            localStorage.setItem('name', name_se);
-            localStorage.setItem('email', email_se);
-
+            localStorage.setItem(obj.email, JSON.stringify(obj));
             showuser(obj);
 
         }
         function showuser(obj){
             const parElement = document.getElementById('listofitems');
             const childElement = document.createElement('li');
-            childElement.textContent= obj.name_se+'-'+obj.email_se;
+            const deletebtn = document.createElement('input');
+            deletebtn.type = 'button';
+            deletebtn.name = 'deletebtn';
+            deletebtn.value = 'Delete';
+            deletebtn.onclick = function(){
+                localStorage.removeItem(obj.email)
+                parElement.removeChild(childElement);
+            }
+            childElement.textContent= obj.name +' - '+obj.email;
+            childElement.appendChild(deletebtn);
             parElement.appendChild(childElement);
         }
       </script>
