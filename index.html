@@ -27,7 +27,7 @@
           email
         };
 
-        axios.post("https://crudcrud.com/api/267430ee4cdc4806afd37549f19090f6/appointmentData", obj)
+        axios.post("https://crudcrud.com/api/e181794ee47546c2bb9cf68292cf7480/appointmentData", obj)
           .then((response) => {
             showUser(response.data);
           })
@@ -37,7 +37,7 @@
       }
 
       window.addEventListener("DOMContentLoaded", () => {
-        axios.get("https://crudcrud.com/api/267430ee4cdc4806afd37549f19090f6/appointmentData")
+        axios.get("https://crudcrud.com/api/e181794ee47546c2bb9cf68292cf7480/appointmentData")
           .then((response) => {
             console.log(response);
             for (var i = 0; i < response.data.length; i++) {
@@ -60,13 +60,20 @@
         const parentNode = document.getElementById('listofitems');
         const childHTML = `<li id="${user._id}">${user.name} - ${user.email}
           <button onclick="deleteUser('${user._id}')">Delete User</button>
-          <button onclick="editUserDetails('${user._id}', '${user.email}', '${user.name}')">Edit</button>
+          <button onclick="editUserDetails('${user.name}','${user.email}','${user._id}')">Edit</button>
         </li>`;
         parentNode.innerHTML += childHTML;
       }
 
+      function editUserDetails(username, emailid, userId){
+        document.getElementById('idemail').value = emailid;
+        document.getElementById('idname').value = username;
+
+        deleteUser(userId)
+      }
+
       function deleteUser(userId) {
-        axios.delete(`https://crudcrud.com/api/267430ee4cdc4806afd37549f19090f6/appointmentData/${userId}`)
+        axios.delete(`https://crudcrud.com/api/e181794ee47546c2bb9cf68292cf7480/appointmentData/${userId}`)
           .then((response) => {
             removeUserFromScreen(userId);
           })
@@ -76,6 +83,7 @@
       }
 
       function removeUserFromScreen(userId) {
+        const parentNode = document.getElementById('listofitems');
         const childNodeToBeDeleted = document.getElementById(userId);
         if (childNodeToBeDeleted) {
           parentNode.removeChild(childNodeToBeDeleted);
